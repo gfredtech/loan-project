@@ -20,12 +20,13 @@ const Dashboard = ({ history }) => {
   const [jwt, setJwt] = useLocalStorage(JWT_KEY, '');
   const [pageIndex, setPageIndex] = useState(1);
   const [collapse, setCollapse] = useState(false);
+  const push = history.push;
 
   useEffect(() => {
     if (jwt.length === 0) {
-      history.push('/login');
+      push('/login');
     }
-  }, [jwt, history]);
+  }, [jwt, push]);
 
   if (jwt.length === 0) {
     return <div>Loading</div>;
@@ -75,7 +76,7 @@ const Dashboard = ({ history }) => {
         </Sider>
         <Layout style={{ marginLeft: collapse ? 80 : 200 }}>
           <Content className="site-layout-background">
-            <div style={{ padding: 25 }}>{currentPage[pageIndex]}</div>
+            <div style={{ padding: 50 }}>{currentPage[pageIndex]}</div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             Loan Calculator ©2020 Created by Ranny Inc.

@@ -30,17 +30,17 @@ const NewEntry = () => {
 
   const layout = {
     labelCol: {
-      span: 5,
+      span: 6,
     },
     wrapperCol: {
-      offset: 3,
-      span: 6,
+      offset: 2,
+      span: 7,
     },
   };
   const tailLayout = {
     wrapperCol: {
-      offset: 4,
-      span: 6,
+      offset: 8,
+      span: 8,
     },
   };
 
