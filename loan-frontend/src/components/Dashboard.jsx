@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocalStorage } from '../util/hooks';
 import {
   AuditOutlined,
-  BankOutlined,
+  BankTwoTone,
   LogoutOutlined,
   UnorderedListOutlined,
   UserOutlined,
@@ -19,6 +19,7 @@ const { Content, Footer, Sider } = Layout;
 const Dashboard = ({ history }) => {
   const [jwt, setJwt] = useLocalStorage(JWT_KEY, '');
   const [pageIndex, setPageIndex] = useState(1);
+  const [collapse, setCollapse] = useState(false);
 
   useEffect(() => {
     if (jwt.length === 0) {
@@ -36,20 +37,18 @@ const Dashboard = ({ history }) => {
     };
 
     return (
-      <Layout>
+      <Layout style={{ minHeight: '100vh' }}>
         <Sider
           style={{
-            overflow: 'auto',
             height: '100vh',
             position: 'fixed',
-            left: 0,
           }}
+          collapsible
+          onCollapse={collapsed => setCollapse(collapsed)}
+          collapsed={collapse}
         >
           <div className="logo">
-            <p style={{ color: 'black', textAlign: 'center' }}>
-              {' '}
-              <BankOutlined /> Bank of Ghana
-            </p>
+            <BankTwoTone style={{ fontSize: 40 }} />
           </div>
           <Menu
             theme="dark"
@@ -60,29 +59,23 @@ const Dashboard = ({ history }) => {
               setPageIndex(parseInt(key, 10));
             }}
           >
-            <Menu.Item key="1">
-              <AuditOutlined />
+            <Menu.Item key="1" icon={<AuditOutlined />}>
               New Entry
             </Menu.Item>
-            <Menu.Item key="2">
-              <UnorderedListOutlined />
+            <Menu.Item key="2" icon={<UnorderedListOutlined />}>
               Entries
             </Menu.Item>
-            <Menu.Item key="3">
-              <UserOutlined />
+            <Menu.Item key="3" icon={<UserOutlined />}>
               Add User
             </Menu.Item>
-            <Menu.Item key="4">
-              <LogoutOutlined />
+            <Menu.Item key="4" icon={<LogoutOutlined />}>
               Logout
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout style={{ marginLeft: 200, minHeight: '100vh' }}>
+        <Layout style={{ marginLeft: collapse ? 80 : 200 }}>
           <Content className="site-layout-background">
-            <div style={{ padding: 25, overflow: 'auto' }}>
-              {currentPage[pageIndex]}
-            </div>
+            <div style={{ padding: 25 }}>{currentPage[pageIndex]}</div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             Loan Calculator ©2020 Created by Ranny Inc.
