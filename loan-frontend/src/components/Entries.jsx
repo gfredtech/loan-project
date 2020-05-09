@@ -55,7 +55,6 @@ const Entries = () => {
         },
         mode: 'cors',
       }).then(res => res.json());
-      console.log(entries);
       setDataSource(entries);
     })();
   }, []);
@@ -63,7 +62,6 @@ const Entries = () => {
   const showDetail = entry => {
     setSelectedEntry(entry);
     setVisible(true);
-    console.log(entry);
   };
   const columns = [
     {

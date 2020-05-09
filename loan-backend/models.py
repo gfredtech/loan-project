@@ -15,7 +15,7 @@ def setup_db(app):
 
 
 def create_tables():
-    db.drop_all()
+    # db.drop_all()
     db.create_all()
 
 

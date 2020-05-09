@@ -26,6 +26,7 @@ const NewEntry = () => {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [collateralImage, setCollateralImage] = useState([]);
+  const [name, setName] = useState('');
 
   const layout = {
     labelCol: {
@@ -44,16 +45,16 @@ const NewEntry = () => {
   };
 
   const handleSubmit = async values => {
-    console.log('hey', values);
     // setLoading(true);
     const { entry } = await fakeFetch(values);
     setPositive(entry['loanStatus']);
     setVisible(true);
     setLoading(false);
+    setName(entry.firstName);
   };
 
   const fakeFetch = async values => {
-    const results = await fetch(`${BASE_API_URL}/entries/new`, {
+    return await fetch(`${BASE_API_URL}/entries/new`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -65,9 +66,6 @@ const NewEntry = () => {
       }),
       mode: 'cors',
     }).then(res => res.json());
-
-    console.log('here', results);
-    return results;
   };
 
   const normFile = e => {
@@ -605,7 +603,7 @@ const NewEntry = () => {
         <div>
           {}
           <span style={{ fontWeight: 'bold' }}>
-            {`'s Loan Status: `}
+            {`${name}'s Loan Status: `}
             <Tag color={positive ? 'green' : 'volcano'}>
               {positive ? 'APPROVED' : 'DECLINED'}
             </Tag>

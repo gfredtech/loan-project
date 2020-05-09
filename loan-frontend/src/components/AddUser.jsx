@@ -24,7 +24,6 @@ const AddUser = () => {
   };
 
   const onFinish = async values => {
-    console.log('Success:', values);
     const { success, message } = await fetch(`${BASE_API_URL}/add`, {
       method: 'POST',
       headers: {
@@ -49,9 +48,7 @@ const AddUser = () => {
     }
   };
 
-  const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
-  };
+  const onFinishFailed = () => {};
 
   return (
     <div>

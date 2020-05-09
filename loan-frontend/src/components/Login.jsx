@@ -12,13 +12,11 @@ const Login = ({ history }) => {
 
   useEffect(() => {
     if (jwt.length !== 0) {
-      console.log(jwt);
       history.push('/');
     }
   }, [jwt, history]);
 
   const handleChange = ({ target: { name, value } }) => {
-    console.log(value);
     setLogin(login => ({ ...login, [name]: value }));
   };
 
@@ -32,7 +30,6 @@ const Login = ({ history }) => {
       body: JSON.stringify(login),
       mode: 'cors',
     }).then(res => res.json());
-    console.log(success);
     if (success) {
       setJwt('abcd');
     }
