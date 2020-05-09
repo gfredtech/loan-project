@@ -1,7 +1,7 @@
 import os
 
-from sqlalchemy import Column, String, Integer, Date, Boolean, LargeBinary
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, String, Integer
 
 db = SQLAlchemy()
 database_path = os.environ['DATABASE_URL']
@@ -15,7 +15,7 @@ def setup_db(app):
 
 
 def create_tables():
-    # db.drop_all()
+    db.drop_all()
     db.create_all()
 
 
@@ -79,7 +79,7 @@ class Entries(db.Model):
     propertyType = db.Column(db.String)
     creditScore = db.Column(db.Integer)
     isAccountHolder = db.Column(db.Boolean)
-    accountNumber = db.Column(db.Integer)
+    accountNumber = db.Column(db.String)
     hasPendingLoan = db.Column(db.Boolean)
     hasCollateral = db.Column(db.Boolean)
     collateralImage = db.Column(db.String)
