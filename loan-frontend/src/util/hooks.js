@@ -27,7 +27,7 @@ export function useLocalStorage(key, initialValue) {
       // Save state
       setStoredValue(valueToStore);
       // Save to local storage
-      if (valueToStore === '') localStorage.removeItem(key);
+      if (valueToStore === '') localStorage.setItem(key, '');
       else localStorage.setItem(key, valueToStore);
     } catch (error) {
       // A more advanced implementation would handle the error case

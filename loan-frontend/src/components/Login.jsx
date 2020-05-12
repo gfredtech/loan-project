@@ -21,7 +21,10 @@ const Login = ({ history }) => {
   };
 
   const handleLogin = async () => {
-    const { success } = await fetch(`${BASE_API_URL}/login`, {
+    const {
+      success,
+      admin: { id },
+    } = await fetch(`${BASE_API_URL}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -31,7 +34,7 @@ const Login = ({ history }) => {
       mode: 'cors',
     }).then(res => res.json());
     if (success) {
-      setJwt('abcd');
+      setJwt(id);
     }
   };
 

@@ -51,7 +51,7 @@ def create_app(test_config=None):
         if admin:
             return jsonify({
                 'success': True,
-                'admin': admin.email
+                'admin': admin.format()
             })
 
         abort(403)
@@ -75,7 +75,45 @@ def create_app(test_config=None):
         return jsonify({
             'success': True,
             'admin': admin.format(),
-            'message': 'Successfully added new Admin'
+            'message': 'Successfully added new admin'
+        })
+
+    @app.route('/admin/email/<int:admin_id>', methods=['PATCH'])
+    def change_email(admin_id):
+        admin = Admins.query.get(admin_id)
+
+        body = request.get_json()
+        new_email = body.get('email')
+
+        if not (admin and new_email):
+            abort(404)
+
+        admin.email = new_email
+        admin.update()
+
+        return jsonify({
+            'success': 'True',
+            'message': 'Email updated successfully',
+            'admin': admin.format()
+        })
+
+    @app.route('/admin/password/<int:admin_id>', methods=['PATCH'])
+    def change_password(admin_id):
+        admin = Admins.query.get(admin_id)
+
+        body = request.get_json()
+        new_password = body.get('password')
+
+        if not (admin and new_password):
+            abort(404)
+
+        admin.password = new_password
+        admin.update()
+
+        return jsonify({
+            'success': 'True',
+            'message': 'Email updated successfully',
+            'admin': admin.format()
         })
 
     @app.route('/entries', methods=['GET'])
@@ -170,6 +208,18 @@ def create_app(test_config=None):
         return jsonify({
             'success': True,
             'admins': admins
+        })
+
+    @app.route('/admin/<int:admin_id>', methods=['GET'])
+    def get_admin(admin_id):
+        admin = Admins.query.get(admin_id)
+
+        if not admin:
+            abort(422)
+
+        return jsonify({
+            'success': True,
+            'admin': admin.format()
         })
 
     @app.route('/upload.do', methods=['POST'])

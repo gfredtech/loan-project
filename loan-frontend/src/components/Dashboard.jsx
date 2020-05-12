@@ -4,6 +4,7 @@ import {
   AuditOutlined,
   BankTwoTone,
   LogoutOutlined,
+  SettingOutlined,
   UnorderedListOutlined,
   UserOutlined,
 } from '@ant-design/icons';
@@ -13,6 +14,7 @@ import 'antd/dist/antd.css';
 import NewEntry from './NewEntry';
 import Entries from './Entries';
 import AddUser from './AddUser';
+import Settings from './Settings';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -35,6 +37,7 @@ const Dashboard = ({ history }) => {
       1: <NewEntry />,
       2: <Entries />,
       3: <AddUser />,
+      4: <Settings id={jwt} />,
     };
 
     return (
@@ -56,7 +59,7 @@ const Dashboard = ({ history }) => {
             mode="inline"
             defaultSelectedKeys={['1']}
             onClick={({ key }) => {
-              if (key === '4') setJwt('');
+              if (key === '5') setJwt('');
               setPageIndex(parseInt(key, 10));
             }}
           >
@@ -69,7 +72,10 @@ const Dashboard = ({ history }) => {
             <Menu.Item key="3" icon={<UserOutlined />}>
               Add User
             </Menu.Item>
-            <Menu.Item key="4" icon={<LogoutOutlined />}>
+            <Menu.Item key="4" icon={<SettingOutlined />}>
+              Settings
+            </Menu.Item>
+            <Menu.Item key="5" icon={<LogoutOutlined />}>
               Logout
             </Menu.Item>
           </Menu>

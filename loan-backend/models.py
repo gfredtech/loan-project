@@ -15,8 +15,9 @@ def setup_db(app):
 
 
 def create_tables():
+    pass
     # db.drop_all()
-    db.create_all()
+    # db.create_all()
 
 
 def create_superuser():
@@ -35,8 +36,7 @@ class Admins(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @staticmethod
-    def update():
+    def update(self):
         db.session.commit()
 
     def delete(self):
@@ -94,8 +94,7 @@ class Entries(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @staticmethod
-    def update():
+    def update(self):
         db.session.commit()
 
     def delete(self):
