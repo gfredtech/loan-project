@@ -6,8 +6,8 @@ import Dashboard from './components/Dashboard';
 import 'antd/dist/antd.css';
 
 export const JWT_KEY = '__jwt_';
-// export const BASE_API_URL = 'https://loan-backend.herokuapp.com';
-export const BASE_API_URL = 'http://localhost:5000';
+export const BASE_API_URL = 'https://loan-backend.herokuapp.com';
+// export const BASE_API_URL = 'http://localhost:5000';
 
 function App() {
   return (
