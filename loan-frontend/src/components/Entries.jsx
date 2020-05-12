@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Avatar, Button, Descriptions, Modal, Table, Tag } from 'antd';
+import { Avatar, Button, Descriptions, Modal, Spin, Table, Tag } from 'antd';
 import moment from 'moment';
 import { BASE_API_URL } from '../App';
 
@@ -108,12 +108,6 @@ const Entries = () => {
       key: 'education',
     },
     {
-      title: 'Self-Employed',
-      dataIndex: 'isSelfEmployed',
-      key: 'isSelfEmployed',
-      render: selfEmployed => <span>{selfEmployed ? 'Yes' : 'No'}</span>,
-    },
-    {
       title: 'Applicant Income',
       dataIndex: 'monthlyNetSalary',
       key: 'monthlyNetSalary',
@@ -145,12 +139,14 @@ const Entries = () => {
 
   return (
     <div>
-      <Table
-        style={{ marginRight: '5000' }}
-        dataSource={dataSource}
-        columns={columns}
-        rowKey={record => record.id}
-      />
+      <Spin spinning={dataSource.length === 0} size="large" tip="Loading...">
+        <Table
+          style={{ marginRight: '5000' }}
+          dataSource={dataSource}
+          columns={columns}
+          rowKey={record => record.id}
+        />
+      </Spin>
       <Modal
         visible={visible}
         title="Details"

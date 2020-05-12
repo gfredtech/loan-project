@@ -48,8 +48,6 @@ const AddUser = () => {
     }
   };
 
-  const onFinishFailed = () => {};
-
   return (
     <div>
       {alert.showAlert && (
@@ -73,7 +71,6 @@ const AddUser = () => {
           remember: true,
         }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label="E-mail"

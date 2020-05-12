@@ -131,7 +131,7 @@ const NewEntry = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label="Surnames"
+          label="Surname"
           name="surname"
           rules={[
             {
@@ -148,7 +148,7 @@ const NewEntry = () => {
           rules={[
             {
               required: true,
-              message: 'Please input first name',
+              message: 'Please input date of birth',
             },
           ]}
         >
@@ -160,7 +160,7 @@ const NewEntry = () => {
           rules={[
             {
               required: true,
-              message: 'Please select your gender',
+              message: 'Please select gender',
             },
           ]}
         >
@@ -226,7 +226,7 @@ const NewEntry = () => {
           rules={[
             {
               required: true,
-              message: 'Please input your telephone number',
+              message: 'Please input telephone number',
             },
           ]}
         >
@@ -242,7 +242,7 @@ const NewEntry = () => {
             },
             {
               required: true,
-              message: 'Please input your E-mail!',
+              message: 'Please input E-mail!',
             },
           ]}
         >
@@ -274,7 +274,7 @@ const NewEntry = () => {
         </Form.Item>
         <Divider>Employment Data</Divider>
         <Form.Item
-          label="Are you self-employed?"
+          label="Are they self-employed?"
           name="isSelfEmployed"
           valuePropName="checked"
           rules={[
@@ -291,7 +291,7 @@ const NewEntry = () => {
           rules={[
             {
               required: true,
-              message: 'Please enter your current employer',
+              message: 'Please input current employer',
             },
           ]}
         >
@@ -315,7 +315,7 @@ const NewEntry = () => {
           rules={[
             {
               pattern: /^[0-9]+$/,
-              message: 'Please enter years of experience',
+              message: 'Invalid input',
             },
             {
               required: true,
