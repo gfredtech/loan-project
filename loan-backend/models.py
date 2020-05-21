@@ -20,8 +20,8 @@ def create_tables():
     # db.create_all()
 
 
-def create_superuser():
-    admin = Admins(email='admin@example.com', password='secret')
+def create_superuser(email, password):
+    admin = Admins(email=email, password=password)
     admin.insert()
 
 

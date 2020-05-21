@@ -1,5 +1,4 @@
 import pickle
-from datetime import datetime
 
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler
@@ -46,10 +45,3 @@ def predict(entry: Entries):
     except BaseException as e:
         print(e)
         return 0
-
-
-if __name__ == '__main__':
-    entry = Entries(name='Godfred Asamoah', gender='Male', education='Graduate', selfEmployed='No', maritalStatus='No',
-                    propertyType='Rural', coapplicantIncome=0, dob=datetime.utcnow(), numberOfDependents=0,
-                    applicantIncome=0, loanAmount=10000000, loanAmountTerm=360)
-    print(predict(entry))

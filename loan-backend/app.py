@@ -16,7 +16,10 @@ def create_app(test_config=None):
 
     setup_db(app)
     create_tables()
-    create_superuser()
+    email = 'admin@example.com'
+    password = 'secret'
+    if not Admins.query.filter(Admins.email == email).first():
+        create_superuser(email, password)
 
     cloudinary.config(
         cloud_name='dhpzvfror',
@@ -55,6 +58,32 @@ def create_app(test_config=None):
             })
 
         abort(403)
+
+    @app.route('/admins', methods=['GET'])
+    def get_admins():
+        admins = Admins.query.all()
+
+        if not admins:
+            abort(422)
+
+        admins = [admin.format() for admin in admins]
+
+        return jsonify({
+            'success': True,
+            'admins': admins
+        })
+
+    @app.route('/admin/<int:admin_id>', methods=['GET'])
+    def get_admin(admin_id):
+        admin = Admins.query.get(admin_id)
+
+        if not admin:
+            abort(422)
+
+        return jsonify({
+            'success': True,
+            'admin': admin.format()
+        })
 
     @app.route('/admin/add', methods=['POST'])
     def add_user():
@@ -112,7 +141,7 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': 'True',
-            'message': 'Email updated successfully',
+            'message': 'Password updated successfully',
             'admin': admin.format()
         })
 
@@ -195,32 +224,6 @@ def create_app(test_config=None):
         except BaseException as e:
             print(e)
             abort(422)
-
-    @app.route('/admins', methods=['GET'])
-    def get_admins():
-        admins = Admins.query.all()
-
-        if not admins:
-            abort(422)
-
-        admins = [admin.format() for admin in admins]
-
-        return jsonify({
-            'success': True,
-            'admins': admins
-        })
-
-    @app.route('/admin/<int:admin_id>', methods=['GET'])
-    def get_admin(admin_id):
-        admin = Admins.query.get(admin_id)
-
-        if not admin:
-            abort(422)
-
-        return jsonify({
-            'success': True,
-            'admin': admin.format()
-        })
 
     @app.route('/upload.do', methods=['POST'])
     def do_upload():
