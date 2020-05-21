@@ -82,7 +82,7 @@ const Dashboard = ({ history }) => {
         </Sider>
         <Layout style={{ marginLeft: collapse ? 80 : 200 }}>
           <Content className="site-layout-background">
-            <div style={{ padding: 50 }}>{currentPage[pageIndex]}</div>
+            <div style={{ padding: 50, overflow: 'auto' }}>{currentPage[pageIndex]}</div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             Loan Calculator ©2020 Created by Ranny Inc.
