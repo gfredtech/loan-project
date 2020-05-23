@@ -9,6 +9,7 @@ const Settings = ({ id }) => {
   });
 
   const [emailButtonDisabled, setEmailButtonDisabled] = useState(true);
+  const [passwordButtonDisabled, setPasswordButtonDisabled] = useState(true);
   const [form] = Form.useForm();
 
   const layout = {
@@ -40,12 +41,14 @@ const Settings = ({ id }) => {
     })();
   }, [id]);
 
-  const value = form.getFieldValue('email');
+  const emailField = form.getFieldValue('email');
   useEffect(() => {
-    if (value) {
-      setEmailButtonDisabled(value === userData.email || value.length === 0);
+    if (emailField) {
+      setEmailButtonDisabled(
+        emailField === userData.email || emailField.length === 0
+      );
     }
-  }, [value, userData.email]);
+  }, [emailField, userData.email]);
 
   const handleEmailUpdate = async () => {
     const newEmail = form.getFieldValue('email');
@@ -107,6 +110,20 @@ const Settings = ({ id }) => {
   };
 
   const handlePasswordChange = (name, value) => {
+    setPasswordButtonDisabled(
+      Object.keys(
+        form.getFieldsValue([
+          'currentPassword',
+          'newPassword',
+          'repeatNewPassword',
+        ])
+      ).filter(value => {
+        return (
+          typeof form.getFieldValue(value) === 'undefined' ||
+          form.getFieldValue(value) === ''
+        );
+      }).length > 0
+    );
     form.setFieldsValue({
       name: value,
     });
@@ -181,7 +198,11 @@ const Settings = ({ id }) => {
               />
             </Form.Item>
           </section>
-          <Button onClick={handlePasswordUpdate} type="primary">
+          <Button
+            disabled={passwordButtonDisabled}
+            onClick={handlePasswordUpdate}
+            type="primary"
+          >
             Update
           </Button>
         </Form>
