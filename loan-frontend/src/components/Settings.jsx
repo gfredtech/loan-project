@@ -137,38 +137,53 @@ const Settings = ({ id }) => {
           form={form}
         >
           <section>
-            <Form.Item label="Email" name="email">
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail',
+                },
+              ]}
+            >
               <Input onChange={handleEmailChange} />
             </Form.Item>
-            <Button disabled={emailButtonDisabled} onClick={handleEmailUpdate}>
+            <Button
+              disabled={emailButtonDisabled}
+              onClick={handleEmailUpdate}
+              type="primary"
+            >
               Update
             </Button>
           </section>
           <Divider>Password Settings</Divider>
           <section>
             <Form.Item label="Current Password" name="currentPassword">
-              <Input
+              <Input.Password
                 onChange={({ target: { value } }) =>
                   handlePasswordChange('currentPassword', value)
                 }
               />
             </Form.Item>
             <Form.Item label="New Password" name="newPassword">
-              <Input
+              <Input.Password
                 onChange={({ target: { value } }) =>
                   handlePasswordChange('newPassword', value)
                 }
               />
             </Form.Item>
             <Form.Item label="Repeat New Password" name="repeatNewPassword">
-              <Input
+              <Input.Password
                 onChange={({ target: { value } }) =>
                   handlePasswordChange('repeatNewPassword', value)
                 }
               />
             </Form.Item>
           </section>
-          <Button onClick={handlePasswordUpdate}>Update</Button>
+          <Button onClick={handlePasswordUpdate} type="primary">
+            Update
+          </Button>
         </Form>
       </div>
     );
