@@ -4,6 +4,7 @@ import {
   AuditOutlined,
   BankTwoTone,
   LogoutOutlined,
+  MessageOutlined,
   SettingOutlined,
   UnorderedListOutlined,
   UserOutlined,
@@ -15,6 +16,7 @@ import NewEntry from './NewEntry';
 import Entries from './Entries';
 import AddUser from './AddUser';
 import Settings from './Settings';
+import Messages from './Messages';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -38,6 +40,7 @@ const Dashboard = ({ history }) => {
       2: <Entries />,
       3: <AddUser />,
       4: <Settings id={jwt} />,
+      5: <Messages id={jwt} />,
     };
 
     return (
@@ -59,7 +62,7 @@ const Dashboard = ({ history }) => {
             mode="inline"
             defaultSelectedKeys={['1']}
             onClick={({ key }) => {
-              if (key === '5') setJwt('');
+              if (key === '0') setJwt('');
               setPageIndex(parseInt(key, 10));
             }}
           >
@@ -75,14 +78,19 @@ const Dashboard = ({ history }) => {
             <Menu.Item key="4" icon={<SettingOutlined />}>
               Settings
             </Menu.Item>
-            <Menu.Item key="5" icon={<LogoutOutlined />}>
+            <Menu.Item key="5" icon={<MessageOutlined />}>
+              Messages
+            </Menu.Item>
+            <Menu.Item key="0" icon={<LogoutOutlined />}>
               Logout
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout style={{ marginLeft: collapse ? 80 : 200 }}>
           <Content className="site-layout-background">
-            <div style={{ padding: 50, overflow: 'auto' }}>{currentPage[pageIndex]}</div>
+            <div style={{ padding: 50, overflow: 'auto' }}>
+              {currentPage[pageIndex]}
+            </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             Loan Calculator ©2020 Created by Ranny Inc.

@@ -24,7 +24,7 @@ const AddUser = () => {
   };
 
   const onFinish = async values => {
-    const { success, message } = await fetch(`${BASE_API_URL}/add`, {
+    const { success, message } = await fetch(`${BASE_API_URL}/admin/add`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

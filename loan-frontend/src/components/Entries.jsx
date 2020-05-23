@@ -18,7 +18,9 @@ const Entries = () => {
   const [dataSource, setDataSource] = useState([]);
 
   let searchInput = useRef(null);
+  // eslint-disable-next-line
   const [searchText, setSearchText] = useState('');
+  // eslint-disable-next-line
   const [searchedColumn, setSearchColumn] = useState('');
 
   const [visible, setVisible] = useState(false);
